@@ -14,8 +14,7 @@ char * prefixEvaluation( char * exp ){
 		char c = exp[i];
 		
 		if( c >= '0' && c <= '9' ){
-			char c_str[] = { c, '\0' };
-			push( atoi( c_str ) );
+			push( c - '0' );
 			
 		} else {
 			
