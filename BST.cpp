@@ -112,6 +112,10 @@ public:
 
 		return root;
 	}
+	
+	void deleteNode( int value ){
+	    deleteNode( root, value );
+	}
 
 	Node * findMinRight( Node * root ){
 		Node * tmp = root -> right;
@@ -156,17 +160,18 @@ int main(){
 
 	int number = 5;
 	bool e = tree.search( number );
-
-	if( e ){
-		cout << number << " Found in the Tree !" << endl;
-	} else {
-		cout << number << " Isn't Found in the Tree !" << endl;
-	}
-
+	if( e ) cout << number << " Found in the Tree !";
+	else cout << number << " Isn't Found in the Tree !\n";
+	
+	number = 11;
+	e = tree.search( number );
+	if( e ) cout << number << " Found in the Tree !\n";
+	else cout << number << " Isn't Found in the Tree !";
+	
 	// // Deleting node "13" ...
-	tree.deleteNode( tree.root, 13 );
-
-	cout << "TREE AFTER DELETE: " << endl;
+	tree.deleteNode( 13 );
+	
+	cout << "\nAFTER DELETE: ";
 	tree.printTreeInOrder();
 
 	return 0;
