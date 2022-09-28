@@ -1,10 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 /*
     NAME: Ruhail Maqbool Mir
     ROLL NO: CSE_20_LE_64
 */
+
+/* Utils */
+bool isPrime( int n ){
+    for( int i=2; i < n; i++ ){
+        if( n % i == 0 ) {
+            return false;
+        }
+    }
+    return true;
+}
+
+/* Utils END */
 
 /* Node START */
 
@@ -56,6 +69,35 @@ void nodePost( Node * root ){
     printf("%d, ", root -> data);
 }
 
+void nodePrimesInOrder( Node * root ){
+    if ( root == NULL ) return;
+    if( root -> left != NULL ) nodePrimesInOrder( root -> left );
+    
+    if( isPrime ( root -> data ) ){
+        printf("%d, ", root -> data);
+    }
+    
+    if( root -> right != NULL ) nodePrimesInOrder( root -> right );
+}
+
+void nodeEvensIn( Node * root ){
+    if ( root == NULL ) return;
+    if( root -> left != NULL ) nodeEvensIn( root -> left );
+    if( root -> data % 2 == 0 ){
+        printf("%d, ", root -> data);
+    }
+    if( root -> right != NULL ) nodeEvensIn( root -> right );
+}
+
+void nodeOddsIn( Node * root ){
+    if ( root == NULL ) return;
+    if( root -> left != NULL ) nodeOddsIn( root -> left );
+    if( root -> data % 2 != 0 ){
+        printf("%d, ", root -> data);
+    }
+    if( root -> right != NULL ) nodeOddsIn( root -> right );
+}
+
 /* Node END */
 
 /* Tree Start */
@@ -83,6 +125,21 @@ void treePrintIn(){
 
 void treePrintPost(){
     nodePost( nodeRoot );
+    printf("\n");
+}
+
+void treePrintPrimesInOrder(){
+    nodePrimesInOrder( nodeRoot );
+    printf("\n");
+}
+
+void treePrintEvensInOrder(){
+    nodeEvensIn( nodeRoot );
+    printf("\n");
+}
+
+void treePrintOddsInOrder(){
+    nodeOddsIn( nodeRoot );
     printf("\n");
 }
 
@@ -145,8 +202,19 @@ int main() {
         treeInsert( A[i] );
     }
     
-    printf("Before Deleting: \n");
-    treePrintPre();
+    printf("Current tree State (In Order): \n");
+    treePrintIn();
+    
+    printf("\nPrimes in the Tree (In Order): \n");
+    treePrintPrimesInOrder();
+    
+    printf("\nEven numbers in the Tree (In Order): \n");
+    treePrintEvensInOrder();
+    
+    printf("\nOdd numbers in the Tree (In Order): \n");
+    treePrintOddsInOrder();
+    
+    printf("\nDeleting: 11, 55, 99, 24\n");
     
     treeDelete( 11 );
     treeDelete( 55 );
